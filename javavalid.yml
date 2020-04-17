@@ -1,0 +1,23 @@
+---
+ - hosts: all
+   tasks:
+     - name: Obtain information about a folder
+       win_stat:
+         path: C:\Program Files
+       register: folder_info
+
+     - debug: 
+         msg: '{{ folder_info }}'
+       when: folder_info is success
+
+## for version check
+     - name: Check if java is installed
+       win_command: java -version
+       register: java_result
+
+     - debug:
+         msg: "validated"
+       when: java_result is success 
+                    
+     
+
